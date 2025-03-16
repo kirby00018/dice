@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Dice</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            padding: 20px;
+        }
+        .dice-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .dice {
+            width: 100px;
+            height: 100px;
+            background-color: gray;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            transition: background-color 0.5s;
+        }
+        /* Spin Animation */
+        .spin {
+            animation: spin 1s ease-in-out;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Logo -->
+    <div class="header">
+        <img src="images/logo.png" alt="Online Dice Logo" class="logo">
+    </div>
+
+    <!-- Title & Button -->
+    <h1>🎲 Color Dice Roller 🎲</h1>
+    <button onclick="rollDice()">Roll Dice</button>
+
+    <!-- Dice Containers -->
+    <div class="dice-container">
+        <div class="dice" id="dice1"></div>
+        <div class="dice" id="dice2"></div>
+        <div class="dice" id="dice3"></div>
+        <div class="dice" id="dice4"></div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        function rollDice() {
+            let colors = ["red", "blue", "green", "yellow", "purple", "orange"];
+            let diceElements = document.querySelectorAll(".dice");
+
+            diceElements.forEach(dice => {
+                // Add spin animation
+                dice.classList.add("spin");
+
+                // Wait for the spin animation to finish before changing color
+                setTimeout(() => {
+                    let randomColor = colors[Math.floor(Math.random() * colors.length)];
+                    dice.style.backgroundColor = randomColor;
+                    dice.classList.remove("spin");
+                }, 1000);
+            });
+        }
+    </script>
+
+</body>
+</html>
